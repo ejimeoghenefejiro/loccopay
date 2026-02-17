@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS | Loccapay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pos-container {
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            /* Fill specific height for keypad */
+            justify-content: space-between;
+        }
+
+        .amount-display {
+            background: #fff;
+            padding: 32px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .amount-display .label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .amount-display .value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .key {
+            background: #fff;
+            border: none;
+            padding: 24px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+
+        .key:active {
+            background: #f3f4f6;
+            transform: scale(0.98);
+        }
+
+        .key.action {
+            background: #f0fdf4;
+            color: var(--primary);
+        }
+
+        /* QR Modal Styling */
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Desktop Sidebar (Same as Dashboard) -->
+    <nav class="sidebar">
+        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 40px; color: var(--accent);">
+            <i class="fa-solid fa-bolt"></i> Loccapay
+        </div>
+        <ul style="display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="dashboard.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-house" style="width: 24px;"></i> Home</a></li>
+            <li><a href="wallet.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-wallet" style="width: 24px;"></i> Wallet</a></li>
+            <li><a href="history.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-clock-rotate-left" style="width: 24px;"></i> History</a></li>
+            <li><a href="pos.html" class="btn btn-primary"
+                    style="justify-content: flex-start; background: rgba(255,255,255,0.1);"><i
+                        class="fa-solid fa-qrcode" style="width: 24px;"></i> POS Mode</a></li>
+            <li><a href="settings.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-gear" style="width: 24px;"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
+        <header class="dashboard-header">
+            <h3>Receive Payment</h3>
+            <button class="btn btn-outline" style="width: auto; padding: 8px 16px;"><i class="fa-solid fa-history"></i>
+                Recent</button>
+        </header>
+
+        <div class="pos-container slide-up">
+            <div class="amount-display">
+                <div class="label">Enter Amount</div>
+                <div class="value" id="pos-display">₦ 0.00</div>
+            </div>
+
+            <div class="keypad">
+                <button class="key" onclick="addToPos('1')">1</button>
+                <button class="key" onclick="addToPos('2')">2</button>
+                <button class="key" onclick="addToPos('3')">3</button>
+                <button class="key" onclick="addToPos('4')">4</button>
+                <button class="key" onclick="addToPos('5')">5</button>
+                <button class="key" onclick="addToPos('6')">6</button>
+                <button class="key" onclick="addToPos('7')">7</button>
+                <button class="key" onclick="addToPos('8')">8</button>
+                <button class="key" onclick="addToPos('9')">9</button>
+                <button class="key action" onclick="clearPos()">C</button>
+                <button class="key" onclick="addToPos('0')">0</button>
+                <button class="key action" onclick="backspacePos()"><i class="fa-solid fa-delete-left"></i></button>
+            </div>
+
+            <button class="btn btn-primary" style="margin-top: 24px;" data-modal="qr-modal">Generate Payment QR</button>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-house" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Home</span>
+        </a>
+        <a href="wallet.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-wallet" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Wallet</span>
+        </a>
+        <a href="pos.html" style="color: var(--primary); text-align: center;">
+            <div
+                style="background: var(--primary); color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -24px; box-shadow: 0 4px 10px rgba(6, 78, 59, 0.4);">
+                <i class="fa-solid fa-qrcode" style="font-size: 1.5rem;"></i>
+            </div>
+        </a>
+        <a href="history.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-clock-rotate-left"
+                style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">History</span>
+        </a>
+        <a href="settings.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-gear" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Settings</span>
+        </a>
+    </div>
+
+    <!-- QR Modal -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <div style="display: flex; justify-content: flex-end;">
+                <button class="modal-close"><i class="fa-solid fa-xmark fa-lg"></i></button>
+            </div>
+
+            <h3 style="margin-bottom: 8px;">Scan to Pay</h3>
+            <p class="text-muted" style="margin-bottom: 24px;">Show this QR code to the customer</p>
+
+            <div class="qr-placeholder">
+                <i class="fa-solid fa-qrcode" style="font-size: 5rem; color: var(--primary);"></i>
+            </div>
+
+            <div class="amount-display" style="padding: 16px; border: none; background: #f3f4f6; margin-bottom: 0;">
+                <div class="value" style="font-size: 2rem;">₦ 5,000.00</div>
+            </div>
+
+            <button class="btn btn-outline" style="width: 100%; margin-top: 16px;">Share Payment Link</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Simple Keypad Logic
+        let currentAmount = "0";
+
+        function updateDisplay() {
+            const val = parseInt(currentAmount) / 100;
+            document.getElementById('pos-display').innerText = new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN' }).format(val);
+        }
+
+        function addToPos(num) {
+            if (currentAmount === "0") currentAmount = num;
+            else currentAmount += num;
+            updateDisplay();
+        }
+
+        function clearPos() {
+            currentAmount = "0";
+            updateDisplay();
+        }
+
+        function backspacePos() {
+            if (currentAmount.length > 1) {
+                currentAmount = currentAmount.slice(0, -1);
+            } else {
+                currentAmount = "0";
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+
+</html>

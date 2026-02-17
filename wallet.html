@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet | Loccapay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .balance-detail-card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .balance-item label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 4px;
+        }
+
+        .balance-item .amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .funding-method {
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+            transition: border-color 0.2s;
+        }
+
+        .funding-method:hover {
+            border-color: var(--primary);
+        }
+
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f0fdf4;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Desktop Sidebar (Same as Dashboard) -->
+    <nav class="sidebar">
+        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 40px; color: var(--accent);">
+            <i class="fa-solid fa-bolt"></i> Loccapay
+        </div>
+        <ul style="display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="dashboard.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-house" style="width: 24px;"></i> Home</a></li>
+            <li><a href="wallet.html" class="btn btn-primary"
+                    style="justify-content: flex-start; background: rgba(255,255,255,0.1);"><i
+                        class="fa-solid fa-wallet" style="width: 24px;"></i> Wallet</a></li>
+            <li><a href="history.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-clock-rotate-left" style="width: 24px;"></i> History</a></li>
+            <li><a href="pos.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-qrcode" style="width: 24px;"></i> POS Mode</a></li>
+            <li><a href="settings.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-gear" style="width: 24px;"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
+        <header class="dashboard-header">
+            <h3>My Wallet</h3>
+            <button class="btn btn-primary" style="width: auto;" data-modal="fund-modal"><i
+                    class="fa-solid fa-plus"></i> Fund</button>
+        </header>
+
+        <div class="balance-detail-card slide-up">
+            <div class="balance-item">
+                <label>Available Balance</label>
+                <div class="amount currency" data-value="142500.00">₦ 142,500.00</div>
+            </div>
+            <div class="balance-item">
+                <label>Ledger Balance</label>
+                <div class="amount currency" style="color: var(--text-muted);" data-value="145000.00">₦ 145,000.00</div>
+            </div>
+            <div class="balance-item"
+                style="grid-column: span 2; border-top: 1px solid var(--border-light); padding-top: 16px; margin-top: -8px;">
+                <label>Pending Settlement</label>
+                <div class="amount currency" style="color: var(--warning);" data-value="2500.00">₦ 2,500.00</div>
+            </div>
+        </div>
+
+        <h4 style="margin-bottom: 16px;">Funding Methods</h4>
+        <div class="funding-list fade-in">
+            <div class="funding-method" data-modal="fund-modal">
+                <div style="display: flex; align-items: center;">
+                    <div class="method-icon"><i class="fa-solid fa-building-columns"></i></div>
+                    <div>
+                        <h5 class="font-medium">Bank Transfer</h5>
+                        <p class="text-xs text-muted">Instant funding via account number</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+
+            <div class="funding-method">
+                <div style="display: flex; align-items: center;">
+                    <div class="method-icon"><i class="fa-regular fa-credit-card"></i></div>
+                    <div>
+                        <h5 class="font-medium">Card Payment</h5>
+                        <p class="text-xs text-muted">Fund with Debit/Credit card</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+
+            <div class="funding-method">
+                <div style="display: flex; align-items: center;">
+                    <div class="method-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <div>
+                        <h5 class="font-medium">USSD</h5>
+                        <p class="text-xs text-muted">*123# Funding code</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+        </div>
+
+        <h4 style="margin-top: 32px; margin-bottom: 16px;">Funding History</h4>
+        <!-- Reusing transaction item style -->
+        <div class="transaction-item">
+            <div class="t-info">
+                <div class="t-icon credit"><i class="fa-solid fa-arrow-down"></i></div>
+                <div class="t-details">
+                    <h4>Bank Transfer</h4>
+                    <p>Today, 10:42 AM</p>
+                </div>
+            </div>
+            <span class="t-amount credit currency" data-value="50000">+ ₦50,000.00</span>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-house" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Home</span>
+        </a>
+        <a href="wallet.html" style="color: var(--primary); text-align: center;">
+            <i class="fa-solid fa-wallet" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs font-medium">Wallet</span>
+        </a>
+        <a href="pos.html" style="color: var(--text-muted); text-align: center;">
+            <div
+                style="background: var(--primary); color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -24px; box-shadow: 0 4px 10px rgba(6, 78, 59, 0.4);">
+                <i class="fa-solid fa-qrcode" style="font-size: 1.5rem;"></i>
+            </div>
+        </a>
+        <a href="history.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-clock-rotate-left"
+                style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">History</span>
+        </a>
+        <a href="settings.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-gear" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Settings</span>
+        </a>
+    </div>
+
+    <!-- Reuse Fund Modal (Can be imported via JS in a real app, duplicating for pure HTML simplicity) -->
+    <div id="fund-modal" class="modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Add Money</h3>
+                <button class="modal-close"><i class="fa-solid fa-xmark fa-lg"></i></button>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label class="text-sm font-medium">Amount</label>
+                    <input type="number" class="input-field" placeholder="0.00"
+                        style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;">Proceed to Pay</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Loccapay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-avatar {
+            width: 64px;
+            height: 64px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .settings-group {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .settings-item {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item:hover {
+            background: #f9fafb;
+        }
+
+        .s-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Desktop Sidebar (Same as Dashboard) -->
+    <nav class="sidebar">
+        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 40px; color: var(--accent);">
+            <i class="fa-solid fa-bolt"></i> Loccapay
+        </div>
+        <ul style="display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="dashboard.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-house" style="width: 24px;"></i> Home</a></li>
+            <li><a href="wallet.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-wallet" style="width: 24px;"></i> Wallet</a></li>
+            <li><a href="history.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-clock-rotate-left" style="width: 24px;"></i> History</a></li>
+            <li><a href="pos.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-qrcode" style="width: 24px;"></i> POS Mode</a></li>
+            <li><a href="settings.html" class="btn btn-primary"
+                    style="justify-content: flex-start; background: rgba(255,255,255,0.1);"><i class="fa-solid fa-gear"
+                        style="width: 24px;"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
+        <header class="dashboard-header">
+            <h3>Settings</h3>
+        </header>
+
+        <div class="profile-card slide-up">
+            <div class="profile-avatar">CB</div>
+            <div>
+                <h4 class="text-lg">Chibuzor</h4>
+                <p class="text-sm text-muted">chibuzor@example.com</p>
+                <div style="margin-top: 8px;">
+                    <span
+                        style="background: #dcfce7; color: var(--success); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">KYC
+                        Level 2</span>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="text-sm text-muted" style="margin-bottom: 12px; padding-left: 8px;">General</h4>
+        <div class="settings-group fade-in">
+            <div class="settings-item">
+                <div style="display: flex; align-items: center;">
+                    <div class="s-icon"><i class="fa-regular fa-user"></i></div>
+                    <span>Personal Information</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+            <div class="settings-item">
+                <div style="display: flex; align-items: center;">
+                    <div class="s-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <span>Security & PIN</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+            <div class="settings-item">
+                <div style="display: flex; align-items: center;">
+                    <div class="s-icon"><i class="fa-regular fa-id-card"></i></div>
+                    <span>KYC Verification</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+            </div>
+        </div>
+
+        <h4 class="text-sm text-muted" style="margin-bottom: 12px; padding-left: 8px;">Preferences</h4>
+        <div class="settings-group fade-in" style="animation-delay: 0.1s;">
+            <div class="settings-item">
+                <div style="display: flex; align-items: center;">
+                    <div class="s-icon"><i class="fa-regular fa-bell"></i></div>
+                    <span>Notifications</span>
+                </div>
+                <div style="color: var(--primary); font-size: 0.875rem;">On</div>
+            </div>
+            <div class="settings-item">
+                <div style="display: flex; align-items: center;">
+                    <div class="s-icon"><i class="fa-solid fa-moon"></i></div>
+                    <span>Dark Mode</span>
+                </div>
+                <div style="color: var(--text-muted); font-size: 0.875rem;">Auto</div>
+            </div>
+        </div>
+
+        <button class="btn btn-outline"
+            style="width: 100%; border-color: var(--danger); color: var(--danger); margin-top: 24px;">
+            <i class="fa-solid fa-arrow-right-from-bracket" style="margin-right: 8px;"></i> Log Out
+        </button>
+
+        <p class="text-center text-xs text-muted" style="margin-top: 32px;">Version 1.0.0</p>
+        <div style="height: 80px;"></div>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-house" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Home</span>
+        </a>
+        <a href="wallet.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-wallet" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Wallet</span>
+        </a>
+        <a href="pos.html" style="color: var(--text-muted); text-align: center;">
+            <div
+                style="background: var(--primary); color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -24px; box-shadow: 0 4px 10px rgba(6, 78, 59, 0.4);">
+                <i class="fa-solid fa-qrcode" style="font-size: 1.5rem;"></i>
+            </div>
+        </a>
+        <a href="history.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-clock-rotate-left"
+                style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">History</span>
+        </a>
+        <a href="settings.html" style="color: var(--primary); text-align: center;">
+            <i class="fa-solid fa-gear" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs font-medium">Settings</span>
+        </a>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

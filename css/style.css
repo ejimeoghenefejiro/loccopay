@@ -1,0 +1,137 @@
+/* Loccapay Premium Fintech Design System (Marketing Enhanced) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Brand Colors */
+    --primary-dark: #022c22;
+    --primary: #064e3b;
+    --primary-light: #065f46;
+    --accent: #d9f99d;
+    --accent-hover: #bef264;
+
+    /* Functional Colors */
+    --bg-body: #f8fafc;
+    /* Slightly lighter for marketing */
+    --text-main: #111827;
+    --text-muted: #64748b;
+    --border-light: #e2e8f0;
+
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Utilities */
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 50px;
+    /* More pill-shaped for marketing */
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: var(--primary-dark);
+}
+
+.btn-accent:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(190, 242, 100, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--border-light);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}

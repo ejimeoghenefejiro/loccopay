@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Loccapay</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Dashboard Specific Styles */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Wallet Widget */
+        .wallet-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .wallet-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+        }
+
+        .balance-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .balance-amount {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .wallet-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(5px);
+            transition: background 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Quick Actions Grid */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .qa-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+        }
+
+        .qa-card:active {
+            transform: scale(0.96);
+        }
+
+        .qa-icon {
+            width: 48px;
+            height: 48px;
+            background: #f0fdf4;
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        /* Transactions List */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .t-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .t-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .t-icon.credit {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        .t-icon.debit {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .t-details h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .t-details p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .t-amount {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .t-amount.credit {
+            color: var(--success);
+        }
+
+        .t-amount.debit {
+            color: var(--text-main);
+        }
+
+        /* Modal specific */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 24px;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Desktop Sidebar -->
+    <nav class="sidebar">
+        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 40px; color: var(--accent);">
+            <i class="fa-solid fa-bolt"></i> Loccapay
+        </div>
+        <ul style="display: flex; flex-direction: column; gap: 8px;">
+            <li><a href="dashboard.html" class="btn btn-primary"
+                    style="justify-content: flex-start; background: rgba(255,255,255,0.1);"><i class="fa-solid fa-house"
+                        style="width: 24px;"></i> Home</a></li>
+            <li><a href="wallet.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-wallet" style="width: 24px;"></i> Wallet</a></li>
+            <li><a href="history.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-clock-rotate-left" style="width: 24px;"></i> History</a></li>
+            <li><a href="pos.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-qrcode" style="width: 24px;"></i> POS Mode</a></li>
+            <li><a href="settings.html" class="btn btn-outline"
+                    style="border:none; color: #fff; justify-content: flex-start; padding-left: 24px;"><i
+                        class="fa-solid fa-gear" style="width: 24px;"></i> Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container main-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div>
+                <p class="text-sm text-muted">Good Morning,</p>
+                <h3>Chibuzor</h3>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">CB</div>
+            </div>
+        </header>
+
+        <!-- Wallet Widget -->
+        <div class="wallet-card slide-up">
+            <div class="balance-label">
+                <span>Total Balance</span>
+                <i class="fa-solid fa-eye-slash" style="cursor: pointer;"></i>
+            </div>
+            <h1 class="balance-amount currency" data-value="142500.00">₦ 142,500.00</h1>
+            <div class="wallet-actions">
+                <button class="action-btn" data-modal="fund-modal"><i class="fa-solid fa-plus"></i> Add Money</button>
+                <button class="action-btn"><i class="fa-solid fa-paper-plane"></i> Transfer</button>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions fade-in" style="animation-delay: 0.1s;">
+            <a href="pos.html" class="qa-card">
+                <div class="qa-icon"><i class="fa-solid fa-qrcode"></i></div>
+                <span class="font-medium text-sm">Receive Payment</span>
+            </a>
+            <div class="qa-card">
+                <div class="qa-icon" style="background: #e0f2fe; color: #0284c7;"><i
+                        class="fa-solid fa-file-invoice"></i></div>
+                <span class="font-medium text-sm">Pay Bills</span>
+            </div>
+            <div class="qa-card">
+                <div class="qa-icon" style="background: #fef9c3; color: #ca8a04;"><i
+                        class="fa-solid fa-mobile-screen"></i></div>
+                <span class="font-medium text-sm">Buy Airtime</span>
+            </div>
+            <a href="history.html" class="qa-card">
+                <div class="qa-icon" style="background: #f3f4f6; color: #4b5563;"><i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <span class="font-medium text-sm">Analytics</span>
+            </a>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="recent-transactions fade-in" style="animation-delay: 0.2s;">
+            <div class="section-header">
+                <h4>Recent Activity</h4>
+                <a href="history.html" class="text-sm text-primary font-medium">See All</a>
+            </div>
+
+            <div class="transaction-item">
+                <div class="t-info">
+                    <div class="t-icon credit"><i class="fa-solid fa-arrow-down"></i></div>
+                    <div class="t-details">
+                        <h4>Transfer from GTBank</h4>
+                        <p>Today, 10:42 AM</p>
+                    </div>
+                </div>
+                <span class="t-amount credit currency" data-value="50000">+ ₦50,000.00</span>
+            </div>
+
+            <div class="transaction-item">
+                <div class="t-info">
+                    <div class="t-icon debit"><i class="fa-solid fa-burger"></i></div>
+                    <div class="t-details">
+                        <h4>Chicken Republic</h4>
+                        <p>Yesterday, 8:15 PM</p>
+                    </div>
+                </div>
+                <span class="t-amount debit currency" data-value="-4500">- ₦4,500.00</span>
+            </div>
+
+            <div class="transaction-item">
+                <div class="t-info">
+                    <div class="t-icon debit"><i class="fa-solid fa-wifi"></i></div>
+                    <div class="t-details">
+                        <h4>MTN Data Bundle</h4>
+                        <p>Yesterday, 9:00 AM</p>
+                    </div>
+                </div>
+                <span class="t-amount debit currency" data-value="-2000">- ₦2,000.00</span>
+            </div>
+            <!-- Spacer for mobile nav -->
+            <div style="height: 80px; width: 100%;"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" style="color: var(--primary); text-align: center;">
+            <i class="fa-solid fa-house" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs font-medium">Home</span>
+        </a>
+        <a href="wallet.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-wallet" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Wallet</span>
+        </a>
+        <a href="pos.html" style="color: var(--text-muted); text-align: center;">
+            <div
+                style="background: var(--primary); color: #fff; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: -24px; box-shadow: 0 4px 10px rgba(6, 78, 59, 0.4);">
+                <i class="fa-solid fa-qrcode" style="font-size: 1.5rem;"></i>
+            </div>
+        </a>
+        <a href="history.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-clock-rotate-left"
+                style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">History</span>
+        </a>
+        <a href="settings.html" style="color: var(--text-muted); text-align: center;">
+            <i class="fa-solid fa-gear" style="display: block; font-size: 1.25rem; margin-bottom: 4px;"></i>
+            <span class="text-xs">Settings</span>
+        </a>
+    </div>
+
+    <!-- Fund Wallet Modal -->
+    <div id="fund-modal" class="modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Add Money</h3>
+                <button class="modal-close"><i class="fa-solid fa-xmark fa-lg"></i></button>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label class="text-sm font-medium">Amount</label>
+                    <input type="number" class="input-field" placeholder="0.00"
+                        style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">
+                </div>
+
+                <h4 class="text-sm text-muted" style="margin-bottom: 12px;">Payment Method</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+                    <div
+                        style="border: 1px solid var(--primary); background: #f0fdf4; padding: 12px; border-radius: 8px; text-align: center;">
+                        <i class="fa-solid fa-building-columns text-primary" style="margin-bottom: 8px;"></i>
+                        <div class="text-xs font-medium">Transfer</div>
+                    </div>
+                    <div
+                        style="border: 1px solid var(--border-light); padding: 12px; border-radius: 8px; text-align: center;">
+                        <i class="fa-brands fa-cc-mastercard" style="margin-bottom: 8px;"></i>
+                        <div class="text-xs font-medium">Card</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;">Proceed to Pay</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; z-index: 999; display:none;"></div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
