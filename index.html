@@ -409,17 +409,20 @@
                         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
                             <div
                                 style="flex:1; background: #fff; padding: 15px; border-radius: 12px; text-align: center; color: var(--primary); font-weight: 600;">
-                                <i class="fa-solid fa-plus-circle"></i> Add</div>
+                                <i class="fa-solid fa-plus-circle"></i> Add
+                            </div>
                             <div
                                 style="flex:1; background: #fff; padding: 15px; border-radius: 12px; text-align: center; color: var(--primary); font-weight: 600;">
-                                <i class="fa-solid fa-paper-plane"></i> Send</div>
+                                <i class="fa-solid fa-paper-plane"></i> Send
+                            </div>
                         </div>
                         <div class="app-card"
                             style="display: flex; justify-content: space-between; align-items: center;">
                             <div style="display: flex; gap: 10px; align-items: center;">
                                 <div
                                     style="width: 40px; height: 40px; background: #ecfccb; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary);">
-                                    <i class="fa-solid fa-shop"></i></div>
+                                    <i class="fa-solid fa-shop"></i>
+                                </div>
                                 <div style="font-size: 0.9rem; font-weight: 600;">Mama Nkechi Store<br><span
                                         style="font-size: 0.7rem; font-weight: 400; color: #666;">Just now</span></div>
                             </div>
@@ -430,7 +433,8 @@
                             <div style="display: flex; gap: 10px; align-items: center;">
                                 <div
                                     style="width: 40px; height: 40px; background: #dcfce7; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--success);">
-                                    <i class="fa-solid fa-arrow-down"></i></div>
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </div>
                                 <div style="font-size: 0.9rem; font-weight: 600;">Transfer Received<br><span
                                         style="font-size: 0.7rem; font-weight: 400; color: #666;">2 hours ago</span>
                                 </div>
@@ -471,6 +475,87 @@
                 <h3 class="text-xl font-bold mb-2">Lowest Fees</h3>
                 <p class="text-muted">We charge a fraction of what others do. Keep more of your hard-earned money with
                     our capped transaction fees.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merchants Section -->
+    <section class="merchant-section" id="merchants">
+        <div class="merchant-container reveal">
+            <div class="merchant-content">
+                <div class="hero-badge"
+                    style="background: rgba(6, 78, 59, 0.1); color: var(--primary); border-color: rgba(6, 78, 59, 0.2);">
+                    <i class="fa-solid fa-store"></i> For Business
+                </div>
+                <h2>Built for business, <br><span style="color: var(--primary);">designed for growth.</span></h2>
+                <p class="text-muted text-lg" style="margin-bottom: 32px;">Stop losing money to downtime and high fees.
+                    Loccapay gives you the tools to accept payments, manage inventory, and grow your customer base.</p>
+
+                <ul class="merchant-list">
+                    <li>
+                        <i class="fa-solid fa-check-circle"></i>
+                        <div>
+                            <strong>0.5% Capped Fees</strong>
+                            <p>Never pay more than ₦100 per transaction, no matter the amount.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-bolt"></i>
+                        <div>
+                            <strong>Instant Settlement</strong>
+                            <p>Money hits your account immediately. No "T+1" delays.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-file-invoice"></i>
+                        <div>
+                            <strong>Free Invoicing & Inventory</strong>
+                            <p>Manage your entire shop from your phone.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <button class="btn btn-primary" onclick="openModal()" style="margin-top: 32px;">Get Merchant
+                    Account</button>
+            </div>
+            <div class="merchant-visual">
+                <div class="merchant-card floating">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <span style="font-weight: 700; color: var(--primary);">Recent Sales</span>
+                        <span
+                            style="font-size: 0.8rem; background: #ecfccb; color: var(--primary-dark); padding: 4px 8px; border-radius: 12px;">Today</span>
+                    </div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 10px;">₦ 124,500</div>
+                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">
+                        <i class="fa-solid fa-arrow-up" style="color: var(--success);"></i> 15% more than yesterday
+                    </div>
+
+                    <div
+                        style="display: flex; gap: 12px; align-items: center; padding: 12px; background: #f8fafc; border-radius: 12px; margin-bottom: 12px;">
+                        <div
+                            style="width: 40px; height: 40px; background: #e0f2fe; color: #0369a1; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 0.9rem;">Customer #4092</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Card Payment</div>
+                        </div>
+                        <div style="font-weight: 600;">+ ₦ 4,500</div>
+                    </div>
+                    <div
+                        style="display: flex; gap: 12px; align-items: center; padding: 12px; background: #f8fafc; border-radius: 12px;">
+                        <div
+                            style="width: 40px; height: 40px; background: #fce7f3; color: #be185d; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; font-size: 0.9rem;">Customer #4093</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">QR Code</div>
+                        </div>
+                        <div style="font-weight: 600;">+ ₦ 2,100</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -560,6 +645,31 @@
         </div>
     </footer>
 
+    <!-- Download Modal -->
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div
+                    style="width: 60px; height: 60px; background: #ecfccb; color: var(--primary-dark); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px;">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 8px;">We're Launching Soon!</h3>
+                <p class="text-muted">Loccapay is currently in private beta. Join the waitlist to get early access and
+                    ₦1,000 welcome bonus.</p>
+            </div>
+
+            <form style="display: flex; flex-direction: column; gap: 16px;"
+                onsubmit="event.preventDefault(); alert('Thanks for joining! We will notify you soon.'); closeModal();">
+                <input type="email" placeholder="Enter your email address" required
+                    style="padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 1rem; outline: none;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Join Waitlist</button>
+            </form>
+            <p style="text-align: center; margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">No spam, we
+                promise.</p>
+        </div>
+    </div>
+
     <script>
         // Simple Scroll Animation Script
         document.addEventListener('DOMContentLoaded', () => {
@@ -580,6 +690,34 @@
                     nav.classList.add('scrolled');
                 } else {
                     nav.classList.remove('scrolled');
+                }
+            });
+
+            // Modal Logic
+            window.openModal = function () {
+                document.getElementById('downloadModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            window.closeModal = function () {
+                document.getElementById('downloadModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Close modal when clicking outside
+            document.getElementById('downloadModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('downloadModal')) {
+                    closeModal();
+                }
+            });
+
+            // Attach to all download buttons
+            document.querySelectorAll('.btn').forEach(btn => {
+                if (btn.innerText.includes('Download') || btn.innerText.includes('App Store') || btn.innerText.includes('Android') || btn.innerText.includes('Get App')) {
+                    btn.onclick = (e) => {
+                        e.preventDefault();
+                        openModal();
+                    };
                 }
             });
         });
